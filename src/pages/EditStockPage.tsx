@@ -32,14 +32,50 @@ function EditStockPage() {
   };
 
   return (
-    <div>
+    <div style={{ maxWidth: '600px', margin: '0 auto' }}>
       <h1>Edit Stock</h1>
-      <form onSubmit={handleSubmit}>
-      <input value={symbol} onChange={e => setSymbol(e.target.value)} placeholder="Symbol" />
-      <input value={name} onChange={e => setName(e.target.value)} placeholder="Company Name" />
-      <input type="number" value={price} onChange={e => setPrice(Number(e.target.value))} placeholder="Price" />        
-      <button type="submit">Update</button>
-      </form>
+      <div className="card">
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <label style={{ fontSize: '0.9rem', color: 'var(--muted)', marginBottom: '6px', fontWeight: '500' }}>
+              Stock Symbol
+            </label>
+            <input 
+              value={symbol} 
+              onChange={e => setSymbol(e.target.value)} 
+              placeholder="e.g. TSLA" 
+              required
+              style={{ margin: '0' }}
+            />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <label style={{ fontSize: '0.9rem', color: 'var(--muted)', marginBottom: '6px', fontWeight: '500' }}>
+              Company Name
+            </label>
+            <input 
+              value={name} 
+              onChange={e => setName(e.target.value)} 
+              placeholder="e.g. Tesla Inc." 
+              required
+              style={{ margin: '0' }}
+            />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <label style={{ fontSize: '0.9rem', color: 'var(--muted)', marginBottom: '6px', fontWeight: '500' }}>
+              Price ($)
+            </label>
+            <input 
+              type="number" 
+              value={price} 
+              onChange={e => setPrice(Number(e.target.value))} 
+              placeholder="0.00" 
+              required
+              style={{ margin: '0' }}
+            />
+          </div>
+          <button type="submit" className="primary" style={{ marginTop: '8px', padding: '10px 20px', alignSelf: 'flex-start' }}>Update Stock</button>
+        </form>
+      </div>
     </div>
   );
 }

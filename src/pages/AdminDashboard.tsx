@@ -36,28 +36,38 @@ function AdminDashboard() {
     }
   };
 
-  // ログアウト
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("role");
-    navigate("/login");
-  };
-
   return (
     <div>
-      <h1>Admin Dashboard</h1>
-      <button onClick={() => navigate("/admin/add")}>➕ Add Stock</button>
-      <button onClick={handleLogout}>🚪 Logout</button>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <h1>Admin Dashboard</h1>
+        <button className="primary" onClick={() => navigate("/admin/add")}>+ Add Stock</button>
+      </div>
 
-    <ul>
-      {stocks.map(stock => (
-        <li key={stock.id}>
-          {stock.symbol} - {stock.name} - ${stock.price}
-          <button onClick={() => navigate(`/admin/edit/${stock.id}`)}>✏️ Edit</button>
-          <button onClick={() => handleDelete(stock.id)}>🗑️ Delete</button>
-        </li>
-      ))}
-    </ul>
+      <div className="card" style={{ marginTop: '20px' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <thead>
+            <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+              <th style={{ padding: '12px', textAlign: 'left' }}>Symbol</th>
+              <th style={{ padding: '12px', textAlign: 'left' }}>Name</th>
+              <th style={{ padding: '12px', textAlign: 'left' }}>Price</th>
+              <th style={{ padding: '12px', textAlign: 'right' }}>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {stocks.map(stock => (
+              <tr key={stock.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                <td style={{ padding: '12px' }}><strong>{stock.symbol}</strong></td>
+                <td style={{ padding: '12px' }}>{stock.name}</td>
+                <td style={{ padding: '12px' }}>${stock.price}</td>
+                <td style={{ padding: '12px', textAlign: 'right' }}>
+                  <button onClick={() => navigate(`/admin/edit/${stock.id}`)} style={{ marginRight: '8px' }}>Edit</button>
+                  <button onClick={() => handleDelete(stock.id)} style={{ background: 'rgba(239,68,68,0.2)', color: '#ef4444' }}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
