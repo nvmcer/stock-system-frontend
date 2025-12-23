@@ -36,10 +36,26 @@ function AdminDashboard() {
     }
   };
 
+  async function updatePrices() {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch("/api/stocks/update-prices", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    });
+
+  const data = await res.json();
+  alert(data.message);
+}
+
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
         <h1>Admin Dashboard</h1>
+        <button className="primary" onClick={updatePrices}>Update Prices</button>
         <button className="primary" onClick={() => navigate("/admin/add")}>+ Add Stock</button>
       </div>
 
